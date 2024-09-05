@@ -18,27 +18,19 @@ import pyttsx3
 import pvorca
 import time
 import winsound
-
-
 import re
 
-load_dotenv()
+
 
 # API Keys
+load_dotenv()
 groq_api_key = os.environ['groq_api_key']
+ACCESS_KEY = os.environ['PVORCA']
 
 
-# engine = pyttsx3.init()
-# rate = engine.getProperty('rate')
-# engine.setProperty('rate', 150)
-# volume = engine.getProperty('volume')
-# engine.setProperty('volume',2.0)
-# voices = engine.getProperty('voices') 
-# engine.setProperty('voice', voices[0].id)
-ACCESS_KEY = 'CEEepQhH5KUuvP+CK02ieVFw0p5DUfXHynq8bXs1E8dNb1KyCGk5Tw=='
+
+# Configurations
 orca = pvorca.create(access_key=ACCESS_KEY)
-print(orca)
-
 client = Groq()
 sample_rate = 44100
 channels = 2
@@ -118,10 +110,19 @@ def chatbot(user_input):
             return value["messages"].content
 
 emoji_pattern = re.compile("["
-        u"\U0001F600-\U0001F64F"  # emoticons
-        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-        u"\U0001F680-\U0001F6FF"  # transport & map symbols
-        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                           u"\U0001F600-\U0001F64F"  # Emoticons
+                           u"\U0001F300-\U0001F5FF"  # Miscellaneous Symbols and Pictographs
+                           u"\U0001F680-\U0001F6FF"  # Transport and Map Symbols
+                           u"\U0001F700-\U0001F77F"  # Alchemical Symbols
+                           u"\U0001F780-\U0001F7FF"  # Geometric Shapes Extended
+                           u"\U0001F800-\U0001F8FF"  # Supplemental Arrows-C
+                           u"\U0001F900-\U0001F9FF"  # Supplemental Symbols and Pictographs
+                           u"\U0001FA00-\U0001FA6F"  # Chess Symbols
+                           u"\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
+                           u"\U00002700-\U000027BF"  # Dingbats
+                           u"\U0001F1E0-\U0001F1FF"  # Flags (iOS)
+                           u"\U00002500-\U00002BEF"  # Other miscellaneous symbols
+                           u"\U000024C2-\U0001F251"  # Enclosed characters
                            "]+", flags=re.UNICODE)
 
 if __name__ == '__main__':
