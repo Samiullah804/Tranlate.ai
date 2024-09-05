@@ -65,8 +65,6 @@ def chatView(request):
         message = request.POST.get('message')
         response = chatbot(message)
         response = emoji_pattern.sub(r'', response)
-        response = JsonResponse({"response": response})
-        print("Response: ",response)
-
+        return JsonResponse({"response": response})
 
     return render(request, "app/chat.html")
