@@ -12,7 +12,7 @@
                         <img src="https://placehold.co/200x/ffa8e4/ffffff.svg?text=ʕ•́ᴥ•̀ʔ&font=Lato" alt="User Avatar"
                             class="w-8 h-8 rounded-full" />
                     </div>
-                    <div class="flex max-w-96 bg-white rounded-lg p-3 gap-3">
+                    <div class="flex max-w-96 bg-gray-300 rounded-lg p-3 gap-3">
                         <p class="text-gray-700">Hey Bob, how's it going?</p>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
             <form id="messageForm" class="bg-white border-t border-gray-300 p-4 absolute bottom-0 w-3/4" method=="POST">
                 {% csrf_token %}
                 <div class="flex items-center">
-                    <input id="messageInput" type="text"  placeholder="Type a message..."
+                    <input id="messageInput" type="text" placeholder="Type a message..."
                         class="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500" />
                     <button class="bg-indigo-500 text-white px-4 py-2 rounded-md ml-2">
                         Send
@@ -80,6 +80,30 @@
                             message: message,
                         }),
                     })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            // Handle the response from the backend here
+                            const response = data.response;
+                            const newMessageItem = document.createElement("div");
+                            newMessageItem.classList.add(
+                                "flex",
+                                "mb-4",
+                            );
+                            newMessageItem.innerHTML = `
+                                    <div class="w-9 h-9 rounded-full flex items-center justify-center mr-2">
+                                        <img src="https://placehold.co/200x/ffa8e4/ffffff.svg?text=ʕ•́ᴥ•̀ʔ&font=Lato" alt="User Avatar"
+                                            class="w-8 h-8 rounded-full" />
+                                    </div>
+                                    <div class="flex max-w-96 bg-gray-300 rounded-lg p-3 gap-3">
+                                        <p class="text-gray-700">${response}</p>
+                                    </div>`;
+                            messageList.appendChild(newMessageItem);
+                            const chatContainer = document.getElementById("messageList");
+                            chatContainer.scrollTop = chatContainer.scrollHeight;
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                        });
                 });
         </script>
     </div>
