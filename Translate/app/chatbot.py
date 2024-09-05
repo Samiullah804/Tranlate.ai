@@ -9,7 +9,7 @@ from typing import Annotated
 from langgraph.graph import StateGraph,START,END
 from langgraph.graph.message import add_messages
 import re
-from django.http import JsonResponse
+
 
 
 # Configurations
@@ -62,5 +62,6 @@ emoji_pattern = re.compile("["
 def Chatwithgroq(text):
     response = chatbot(text)
     response = emoji_pattern.sub(r'', response)
-    response = JsonResponse({"response": response})
     return response
+    
+    
