@@ -1,3 +1,1 @@
 # Tranlate.ai
-
-This is 
