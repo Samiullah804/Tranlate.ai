@@ -19,7 +19,8 @@
             </div>
 
             <!-- Chat Input -->
-            <form id="messageForm" class="bg-white border-t border-gray-300 p-4 absolute bottom-0 w-3/4">
+            <form id="messageForm" class="bg-white border-t border-gray-300 p-4 absolute bottom-0 w-3/4" method=="POST">
+                {% csrf_token %}
                 <div class="flex items-center">
                     <input id="messageInput" type="text" placeholder="Type a message..."
                         class="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500" />
